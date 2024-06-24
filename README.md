@@ -76,9 +76,9 @@ Every voice is important. If you have something on your mind, create an issue or
 
 | Ansible       | Python |
 | ------------- | ------ |
-| `stable-2.13` | `3.9`  |
 | `stable-2.14` | `3.9`  |
 | `stable-2.15` | `3.10` |
+| `stable-2.16` | `3.10` |
 | `devel`       | `3.10` |
 
 ## External requirements
@@ -226,6 +226,12 @@ localhost                  : ok=1    changed=0    unreachable=0    failed=0    s
   vars:
     digitalocean_token: "{{ lookup('ansible.builtin.env', 'DIGITALOCEAN_TOKEN') }}"
     public_key: "{{ lookup('ansible.builtin.file', ansible_env['HOME'] ~ '/.ssh/sammy.key.pub') }}"
+
+  # You can also default the value of a variable for every DO module using module_defaults
+  # https://docs.ansible.com/ansible/latest/user_guide/playbooks_module_defaults.html
+  # module_defaults:
+  #   group/digitalocean.cloud.all:
+  #     token: "{{ lookup('ansible.builtin.env', 'DIGITALOCEAN_TOKEN') }}"
 
   tasks:
     - name: Create SSH key
